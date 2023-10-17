@@ -16,7 +16,7 @@ use Db;
 
 final class DatabaseTableInstaller implements InstallerInterface
 {
-    public function install()
+    public function install(): bool
     {
         $commands = $this->getCommands();
 

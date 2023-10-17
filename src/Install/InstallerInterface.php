@@ -14,8 +14,5 @@ namespace Mollie\Install;
 
 interface InstallerInterface
 {
-    /**
-     * @return bool
-     */
-    public function install();
+    public function install(): bool;
 }
