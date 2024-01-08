@@ -1,17 +1,25 @@
+/**
+ * NOTICE OF LICENSE
+ *
+ * @author    Klarna Bank AB www.klarna.com
+ * @copyright Copyright (c) permanent, Klarna Bank AB
+ * @license   ISC
+ *
+ * @see       /LICENSE
+ *
+ * International Registered Trademark & Property of Klarna Bank AB
+ */
+
 const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({
-  video: true,
   chromeWebSecurity: false,
-  experimentalMemoryManagement: true,
   experimentalSourceRewriting: true,
-  numTestsKeptInMemory: 0,
-  defaultCommandTimeout: 30000,
+  numTestsKeptInMemory: 5,
+  defaultCommandTimeout: 7000,
   projectId: 'xb89dr',
-  retries: 3,
-  videoCompression: 8,
-  viewportHeight: 1080,
-  viewportWidth: 1920,
+  retries: 2,
+  videoCompression: 13,
   e2e: {
     // We've imported your old cypress plugins here.
     // You may want to clean this up later by importing these.
@@ -28,16 +36,13 @@ module.exports = defineConfig({
           }
         }
       })
-      require('./cypress/plugins/index.js')(on, config)
+      return require('./cypress/plugins/index.js')(on, config);
+    },
+    setupNodeEvents(on, config) {
       require("cypress-fail-fast/plugin")(on, config);
       require('cypress-terminal-report/src/installLogsPrinter')(on);
       return config;
     },
-    // setupNodeEvents(on, config) {
-    //   require("cypress-fail-fast/plugin")(on, config);
-    //   return config;
-    // },
-    experimentalMemoryManagement: true,
     excludeSpecPattern: ['index.php'],
     specPattern: 'cypress/e2e/**/*.{js,jsx,ts,tsx}',
   },
