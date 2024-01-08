@@ -14,7 +14,7 @@ ci-lint:
 run-ps:
 	docker network create prestashop-net-${ps_instance}
 	docker run -ti --name some-mysql-${ps_instance} --network prestashop-net-${ps_instance} -e MYSQL_ROOT_PASSWORD=admin -e MYSQL_DATABASE=prestashop -p 3307:3306 -d mysql:5.7
-	docker run -ti -v $(ROOT_DIR):/var/www/html/modules/klarnapayment -v $(ROOT_DIR)/.docker/php/php.ini:/usr/local/etc/php/conf.d/custom-php.ini --name some-prestashop-${ps_instance} --network prestashop-net-${ps_instance} -e DB_SERVER=some-mysql-${ps_instance} -e PS_INSTALL_AUTO=1 -e DB_NAME=prestashop -e PS_DOMAIN=localhost:8080 -e PS_FOLDER_ADMIN=admin1 -p 8080:80 -d prestashop/prestashop:${ps_instance}
+	docker run -ti -v $(ROOT_DIR):/var/www/html/modules/mollie -v $(ROOT_DIR)/.docker/php/php.ini:/usr/local/etc/php/conf.d/custom-php.ini --name some-prestashop-${ps_instance} --network prestashop-net-${ps_instance} -e DB_SERVER=some-mysql-${ps_instance} -e PS_INSTALL_AUTO=1 -e DB_NAME=prestashop -e PS_DOMAIN=localhost:8080 -e PS_FOLDER_ADMIN=admin1 -p 8080:80 -d prestashop/prestashop:${ps_instance}
 
 run-latest:
 	make run-ps ps_instance=latest
@@ -28,11 +28,11 @@ run-wiremock-local:
 	docker run -ti --rm -v $(ROOT_DIR)/wiremock:/home/wiremock -p 8443:8080 wiremock/wiremock
 
 run-unit-tests:
-	docker exec -i some-prestashop-${ps_instance} sh -c "cd /var/www/html/modules/klarnapayment && php vendor/bin/phpunit -c tests/phpunit.xml --testsuite Unit"
+	docker exec -i some-prestashop-${ps_instance} sh -c "cd /var/www/html/modules/mollie && php vendor/bin/phpunit -c tests/phpunit.xml --testsuite Unit"
 
 run-integration-tests:
-	docker exec -i some-prestashop-${ps_instance} sh -c "cd /var/www/html && php bin/console prestashop:module install klarnapayment"
-	docker exec -i some-prestashop-${ps_instance} sh -c "cd /var/www/html/modules/klarnapayment && php vendor/bin/phpunit -c tests/phpunit.xml --testsuite Integration"
+	docker exec -i some-prestashop-${ps_instance} sh -c "cd /var/www/html && php bin/console prestashop:module install mollie"
+	docker exec -i some-prestashop-${ps_instance} sh -c "cd /var/www/html/modules/mollie && php vendor/bin/phpunit -c tests/phpunit.xml --testsuite Integration"
 
 run-tests-github-actions:
 	make run-ps ps_instance=${ps_instance}
@@ -46,11 +46,11 @@ run-local-ps-latest:
 
 # Danger command below, if you are in wrong folder, command might have bad consequences
 run-purge-local-ps:
-	cd ../../ && find . -mindepth 1 ! -regex '^./modules/klarnapayment\(/.*\)?' ! -regex '^./ps-mysql-backup\(/.*\)?' ! -regex '^./.idea\(/.*\)?' -delete
+	cd ../../ && find . -mindepth 1 ! -regex '^./modules/mollie\(/.*\)?' ! -regex '^./ps-mysql-backup\(/.*\)?' ! -regex '^./.idea\(/.*\)?' -delete
 
 # Commands used for demo server deployment
 run-ps-dev:
-	docker-compose -f docker-compose.${ps_instance}.yml -p klarnapayment-${ps_instance} up -d --build
+	docker-compose -f docker-compose.${ps_instance}.yml -p mollie-${ps_instance} up -d --build
 
 #PS1784 CI build
 e2eh1784:
@@ -63,13 +63,13 @@ e2eh1784:
 	# seeding the customized settings for PS
 	mysql -h 127.0.0.1 -P 9002 --protocol=tcp -u root -pprestashop prestashop < ${PWD}/tests/seed/database/prestashop_1784_2.sql
 	# installing module
-	docker exec -i prestashop-1784 sh -c "cd /var/www/html && php  bin/console prestashop:module install klarnapayment"
+	docker exec -i prestashop-1784 sh -c "cd /var/www/html && php  bin/console prestashop:module install mollie"
 	# uninstalling module
-	docker exec -i prestashop-1784 sh -c "cd /var/www/html && php  bin/console prestashop:module uninstall klarnapayment"
+	docker exec -i prestashop-1784 sh -c "cd /var/www/html && php  bin/console prestashop:module uninstall mollie"
 	# installing the module again
-	docker exec -i prestashop-1784 sh -c "cd /var/www/html && php  bin/console prestashop:module install klarnapayment"
+	docker exec -i prestashop-1784 sh -c "cd /var/www/html && php  bin/console prestashop:module install mollie"
 	# enabling the module
-	docker exec -i prestashop-1784 sh -c "cd /var/www/html && php  bin/console prestashop:module enable klarnapayment"
+	docker exec -i prestashop-1784 sh -c "cd /var/www/html && php  bin/console prestashop:module enable mollie"
 	# chmod all folders
 	docker exec -i prestashop-1784 sh -c "chmod -R 777 /var/www/html"
 
@@ -84,13 +84,13 @@ e2eh1784_local:
 	# seeding the customized settings for PS
 	mysql -h 127.0.0.1 -P 9002 --protocol=tcp -u root -pprestashop prestashop < ${PWD}/tests/seed/database/prestashop_1784_2.sql
 	# installing module
-	docker exec -i prestashop-1784 sh -c "cd /var/www/html && php  bin/console prestashop:module install klarnapayment"
+	docker exec -i prestashop-1784 sh -c "cd /var/www/html && php  bin/console prestashop:module install mollie"
 	# uninstalling module
-	docker exec -i prestashop-1784 sh -c "cd /var/www/html && php  bin/console prestashop:module uninstall klarnapayment"
+	docker exec -i prestashop-1784 sh -c "cd /var/www/html && php  bin/console prestashop:module uninstall mollie"
 	# installing the module again
-	docker exec -i prestashop-1784 sh -c "cd /var/www/html && php  bin/console prestashop:module install klarnapayment"
+	docker exec -i prestashop-1784 sh -c "cd /var/www/html && php  bin/console prestashop:module install mollie"
 	# enabling the module
-	docker exec -i prestashop-1784 sh -c "cd /var/www/html && php  bin/console prestashop:module enable klarnapayment"
+	docker exec -i prestashop-1784 sh -c "cd /var/www/html && php  bin/console prestashop:module enable mollie"
 	# chmod all folders
 	docker exec -i prestashop-1784 sh -c "chmod -R 777 /var/www/html"
 
@@ -105,15 +105,15 @@ e2eh8:
 	# seeding the customized settings for PS
 	mysql -h 127.0.0.1 -P 9459 --protocol=tcp -u root -pprestashop prestashop < ${PWD}/tests/seed/database/prestashop_812.sql
 	# installing module
-	docker exec -i prestashop-klarnapayment-8 sh -c "cd /var/www/html && php  bin/console prestashop:module install klarnapayment"
+	docker exec -i prestashop-mollie-8 sh -c "cd /var/www/html && php  bin/console prestashop:module install mollie"
 	# uninstalling module
-	docker exec -i prestashop-klarnapayment-8 sh -c "cd /var/www/html && php  bin/console prestashop:module uninstall klarnapayment"
+	docker exec -i prestashop-mollie-8 sh -c "cd /var/www/html && php  bin/console prestashop:module uninstall mollie"
 	# installing the module again
-	docker exec -i prestashop-klarnapayment-8 sh -c "cd /var/www/html && php  bin/console prestashop:module install klarnapayment"
+	docker exec -i prestashop-mollie-8 sh -c "cd /var/www/html && php  bin/console prestashop:module install mollie"
 	# enabling the module
-	docker exec -i prestashop-klarnapayment-8 sh -c "cd /var/www/html && php  bin/console prestashop:module enable klarnapayment"
+	docker exec -i prestashop-mollie-8 sh -c "cd /var/www/html && php  bin/console prestashop:module enable mollie"
 	# chmod all folders
-	docker exec -i prestashop-klarnapayment-8 sh -c "chmod -R 777 /var/www/html"
+	docker exec -i prestashop-mollie-8 sh -c "chmod -R 777 /var/www/html"
 
 #PS8 running on local machine
 e2eh8_local:
@@ -126,15 +126,15 @@ e2eh8_local:
 	# seeding the customized settings for PS
 	mysql -h 127.0.0.1 -P 9459 --protocol=tcp -u root -pprestashop prestashop < ${PWD}/tests/seed/database/prestashop_812.sql
 	# installing module
-	docker exec -i prestashop-klarnapayment-8 sh -c "cd /var/www/html && php  bin/console prestashop:module install klarnapayment"
+	docker exec -i prestashop-mollie-8 sh -c "cd /var/www/html && php  bin/console prestashop:module install mollie"
 	# uninstalling module
-	docker exec -i prestashop-klarnapayment-8 sh -c "cd /var/www/html && php  bin/console prestashop:module uninstall klarnapayment"
+	docker exec -i prestashop-mollie-8 sh -c "cd /var/www/html && php  bin/console prestashop:module uninstall mollie"
 	# installing the module again
-	docker exec -i prestashop-klarnapayment-8 sh -c "cd /var/www/html && php  bin/console prestashop:module install klarnapayment"
+	docker exec -i prestashop-mollie-8 sh -c "cd /var/www/html && php  bin/console prestashop:module install mollie"
 	# enabling the module
-	docker exec -i prestashop-klarnapayment-8 sh -c "cd /var/www/html && php  bin/console prestashop:module enable klarnapayment"
+	docker exec -i prestashop-mollie-8 sh -c "cd /var/www/html && php  bin/console prestashop:module enable mollie"
 	# chmod all folders
-	docker exec -i prestashop-klarnapayment-8 sh -c "chmod -R 777 /var/www/html"
+	docker exec -i prestashop-mollie-8 sh -c "chmod -R 777 /var/www/html"
 
 #PS8 build only
 e2eh8_local_build:
@@ -155,16 +155,16 @@ run-e2e-tests-locally:
 
 # opening Cypress E2E test runner on local machine - PS1784
 open-cypress-locally-PS1784:
-	export CYPRESS_baseUrl=https://klarnapayment1784.ngrok.io && npx cypress open
+	export CYPRESS_baseUrl=https://mollie1784.ngrok.io && npx cypress open
 
 # opening Cypress E2E test runner on local machine - PS8
 open-cypress-locally-PS8:
-	export CYPRESS_baseUrl=https://klarnapayment8.ngrok.io && npx cypress open
+	export CYPRESS_baseUrl=https://mollie8.ngrok.io && npx cypress open
 
 # launching a Ngrok tunnel session on local machine (better new terminal) - PS1784
 open-ngrok-1784:
-	./ngrok http --region=us --subdomain=klarnapayment1784 8001
+	./ngrok http --region=us --subdomain=mollie1784 8001
 
 # launching a Ngrok tunnel session on local machine (better new terminal) - PS8
 open-ngrok-8:
-	./ngrok http --region=us --subdomain=klarnapayment8 8142
+	./ngrok http --region=us --subdomain=mollie8 8142

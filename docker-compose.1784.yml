@@ -3,7 +3,7 @@ version: "3.7"
 services:
   mysql:
     #platform: linux/amd64
-    container_name: klarnapayment-mysql-1784
+    container_name: mollie-mysql-1784
     image: mysql:5.7
     ports:
       - "9002:3306"
@@ -15,7 +15,7 @@ services:
       test: "mysqladmin ping -h127.0.0.1 -uroot -pprestashop --silent"
       interval: 10s
     networks:
-      - prestashop_klarnapayment_net_1784
+      - prestashop_mollie_net_1784
 
   prestashop-17:
     #platform: linux/amd64
@@ -29,7 +29,7 @@ services:
       DB_PASSWD: prestashop
       DB_NAME: prestashop
       DB_SERVER: mysql
-      PS_DOMAIN: klarnapayment1784.ngrok.io
+      PS_DOMAIN: mollie1784.ngrok.io
       PS_FOLDER_INSTALL: install
       PS_FOLDER_ADMIN: admin1
     depends_on:
@@ -37,10 +37,10 @@ services:
     ports:
       - "8001:80"
     volumes:
-      - ./:/var/www/html/modules/klarnapayment
+      - ./:/var/www/html/modules/mollie
       - ./.docker/.htaccess1784:/var/www/html/.htaccess
     networks:
-      - prestashop_klarnapayment_net_1784
+      - prestashop_mollie_net_1784
     healthcheck:
       test: "wget --no-verbose --tries=1 --spider http://localhost:80 || exit 1"
       interval: 10s
@@ -51,7 +51,7 @@ services:
     ports:
       - '6969:8080'
     networks:
-      - prestashop_klarnapayment_net_1784
+      - prestashop_mollie_net_1784
 
   mailhog:
     image: mailhog/mailhog:latest
@@ -60,8 +60,8 @@ services:
       - 1025:1025 # smtp server
       - 8025:8025 # web ui
     networks:
-      - prestashop_klarnapayment_net_1784
+      - prestashop_mollie_net_1784
 
 networks:
-  prestashop_klarnapayment_net_1784:
-    name: 'prestashop_klarnapayment_net_1784'
+  prestashop_mollie_net_1784:
+    name: 'prestashop_mollie_net_1784'

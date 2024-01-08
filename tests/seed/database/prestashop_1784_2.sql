@@ -3960,8 +3960,8 @@ INSERT INTO `ps_configuration` (`id_configuration`, `id_shop_group`, `id_shop`, 
 (231,	NULL,	NULL,	'HOMESLIDER_PAUSE',	'7700',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
 (232,	NULL,	NULL,	'HOMESLIDER_LOOP',	'1',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
 (233,	NULL,	NULL,	'PS_BASE_DISTANCE_UNIT',	'm',	'0000-00-00 00:00:00',	'2022-03-23 08:34:58'),
-(234,	NULL,	NULL,	'PS_SHOP_DOMAIN',	'klarnapayment1784.ngrok.io',	'0000-00-00 00:00:00',	'2022-03-18 13:44:55'),
-(235,	NULL,	NULL,	'PS_SHOP_DOMAIN_SSL',	'klarnapayment1784.ngrok.io',	'0000-00-00 00:00:00',	'2022-03-18 13:44:55'),
+(234,	NULL,	NULL,	'PS_SHOP_DOMAIN',	'mollie1784.ngrok.io',	'0000-00-00 00:00:00',	'2022-03-18 13:44:55'),
+(235,	NULL,	NULL,	'PS_SHOP_DOMAIN_SSL',	'mollie1784.ngrok.io',	'0000-00-00 00:00:00',	'2022-03-18 13:44:55'),
 (236,	NULL,	NULL,	'PS_SHOP_NAME',	'PS1784',	'0000-00-00 00:00:00',	'2022-03-18 13:44:55'),
 (237,	NULL,	NULL,	'PS_SHOP_EMAIL',	'demo@demo.com',	'0000-00-00 00:00:00',	'2022-03-18 13:44:56'),
 (238,	NULL,	NULL,	'PS_MAIL_METHOD',	'1',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
@@ -4204,10 +4204,10 @@ INSERT INTO `ps_configuration` (`id_configuration`, `id_shop_group`, `id_shop`, 
 (1016,	1,	3,	'SUBSCRIPTION_ATTRIBUTE_MONTHLY',	'29',	'2023-04-05 10:56:03',	'2023-04-05 10:56:03'),
 (1017,	1,	1,	'SUBSCRIPTION_ATTRIBUTE_YEARLY',	'30',	'2023-04-05 10:56:03',	'2023-04-05 10:56:03'),
 (1018,	1,	3,	'SUBSCRIPTION_ATTRIBUTE_YEARLY',	'30',	'2023-04-05 10:56:03',	'2023-04-05 10:56:03'),
-(1019,	1,	1,	'CONF_KLARNAPAYMENT_FIXED',	'0.2',	'2023-12-14 19:06:06',	'2023-12-14 19:06:06'),
-(1020,	1,	1,	'CONF_KLARNAPAYMENT_VAR',	'2',	'2023-12-14 19:06:06',	'2023-12-14 19:06:06'),
-(1021,	1,	1,	'CONF_KLARNAPAYMENT_FIXED_FOREIGN',	'0.2',	'2023-12-14 19:06:06',	'2023-12-14 19:06:06'),
-(1022,	1,	1,	'CONF_KLARNAPAYMENT_VAR_FOREIGN',	'2',	'2023-12-14 19:06:06',	'2023-12-14 19:06:06'),
+(1019,	1,	1,	'CONF_mollie_FIXED',	'0.2',	'2023-12-14 19:06:06',	'2023-12-14 19:06:06'),
+(1020,	1,	1,	'CONF_mollie_VAR',	'2',	'2023-12-14 19:06:06',	'2023-12-14 19:06:06'),
+(1021,	1,	1,	'CONF_mollie_FIXED_FOREIGN',	'0.2',	'2023-12-14 19:06:06',	'2023-12-14 19:06:06'),
+(1022,	1,	1,	'CONF_mollie_VAR_FOREIGN',	'2',	'2023-12-14 19:06:06',	'2023-12-14 19:06:06'),
 (1023,	1,	1,	'KLARNA_PAYMENT_PRODUCTION_ORDER_STATE_PENDING',	'2',	'2023-12-14 19:06:06',	'2023-12-14 19:06:15'),
 (1024,	1,	1,	'KLARNA_PAYMENT_SANDBOX_ORDER_STATE_PENDING',	'2',	'2023-12-14 19:06:06',	'2023-12-14 19:06:15'),
 (1025,	1,	1,	'KLARNA_PAYMENT_PRODUCTION_ORDER_STATE_CAPTURED',	'4',	'2023-12-14 19:06:06',	'2023-12-14 19:06:15'),
@@ -13753,9 +13753,9 @@ INSERT INTO `ps_log` (`id_log`, `severity`, `error_code`, `message`, `object_typ
 (1649,	1,	0,	'Frontcontroller::init - Cart cannot be loaded or an order has already been placed using this cart',	'Cart',	104,	3,	NULL,	5,	0,	0,	'2023-04-05 11:10:06',	'2023-04-05 11:10:06'),
 (1650,	1,	0,	'Frontcontroller::init - Cart cannot be loaded or an order has already been placed using this cart',	'Cart',	104,	3,	NULL,	5,	0,	0,	'2023-04-05 11:10:06',	'2023-04-05 11:10:06'),
 (1651,	1,	0,	'Back office connection from 83.187.117.14',	'',	0,	NULL,	NULL,	5,	1,	1,	'2023-04-05 11:10:49',	'2023-04-05 11:10:49'),
-(1652,	1,	0,	'Protect vendor folder in module klarnapayment',	'',	0,	1,	NULL,	5,	0,	0,	'2023-12-14 19:06:06',	'2023-12-14 19:06:06'),
-(1653,	1,	0,	'Protect vendor folder in module klarnapayment',	'',	0,	1,	NULL,	5,	0,	0,	'2023-12-14 19:06:15',	'2023-12-14 19:06:15'),
-(1654,	1,	0,	'Protect vendor folder in module klarnapayment',	'',	0,	1,	NULL,	5,	0,	0,	'2023-12-14 19:06:19',	'2023-12-14 19:06:19'),
+(1652,	1,	0,	'Protect vendor folder in module mollie',	'',	0,	1,	NULL,	5,	0,	0,	'2023-12-14 19:06:06',	'2023-12-14 19:06:06'),
+(1653,	1,	0,	'Protect vendor folder in module mollie',	'',	0,	1,	NULL,	5,	0,	0,	'2023-12-14 19:06:15',	'2023-12-14 19:06:15'),
+(1654,	1,	0,	'Protect vendor folder in module mollie',	'',	0,	1,	NULL,	5,	0,	0,	'2023-12-14 19:06:19',	'2023-12-14 19:06:19'),
 (1655,	1,	0,	'Back office connection from 188.69.51.77',	'',	0,	NULL,	NULL,	5,	1,	1,	'2023-12-14 19:20:31',	'2023-12-14 19:20:31'),
 (1656,	1,	0,	'Back office connection from 188.69.51.77',	'',	0,	NULL,	NULL,	5,	1,	1,	'2023-12-14 19:22:25',	'2023-12-14 19:22:25');
 
@@ -16781,7 +16781,7 @@ INSERT INTO `ps_order_state` (`id_order_state`, `invoice`, `send_email`, `module
 (26,	0,	0,	'',	'#E74C3C',	0,	0,	0,	0,	0,	0,	0,	0,	0),
 (27,	0,	0,	'',	'#6F8C9F',	0,	0,	0,	0,	0,	0,	0,	0,	0),
 (28,	0,	0,	'',	'#6F8C9F',	0,	0,	0,	0,	0,	0,	0,	0,	0),
-(29,	0,	0,	'klarnapayment',	'#4069e1',	0,	0,	0,	0,	0,	0,	0,	0,	0);
+(29,	0,	0,	'mollie',	'#4069e1',	0,	0,	0,	0,	0,	0,	0,	0,	0);
 
 DROP TABLE IF EXISTS `ps_order_state_lang`;
 CREATE TABLE `ps_order_state_lang` (
@@ -24037,8 +24037,8 @@ CREATE TABLE `ps_shop_url` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `ps_shop_url` (`id_shop_url`, `id_shop`, `domain`, `domain_ssl`, `physical_uri`, `virtual_uri`, `main`, `active`) VALUES
-(1,	1,	'klarnapayment1784.ngrok.io',	'klarnapayment1784.ngrok.io',	'/',	'',	1,	1),
-(3,	3,	'klarnapayment1784.ngrok.io',	'klarnapayment1784.ngrok.io',	'/',	'SHOP2/',	1,	1);
+(1,	1,	'mollie1784.ngrok.io',	'mollie1784.ngrok.io',	'/',	'',	1,	1),
+(3,	3,	'mollie1784.ngrok.io',	'mollie1784.ngrok.io',	'/',	'SHOP2/',	1,	1);
 
 DROP TABLE IF EXISTS `ps_smarty_cache`;
 CREATE TABLE `ps_smarty_cache` (

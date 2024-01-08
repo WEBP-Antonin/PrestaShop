@@ -1,7 +1,7 @@
 {
-  "name": "klarnapayment",
+  "name": "mollie",
   "version": "1.0.0",
-  "description": "<p align=\"center\">   <img src=\"https://info.klarnapayment.com/hubfs/github/prestashop/logo.png\" width=\"128\" height=\"128\"/> </p> <h1 align=\"center\">klarnapayment for Prestashop</h1>",
+  "description": "<p align=\"center\">   <img src=\"https://info.mollie.com/hubfs/github/prestashop/logo.png\" width=\"128\" height=\"128\"/> </p> <h1 align=\"center\">mollie for Prestashop</h1>",
   "main": "index.js",
   "directories": {
     "test": "tests"
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/klarnapayment/PrestaShop.git"
+    "url": "git+https://github.com/mollie/PrestaShop.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/klarnapayment/PrestaShop/issues"
+    "url": "https://github.com/mollie/PrestaShop/issues"
   },
-  "homepage": "https://github.com/klarnapayment/PrestaShop#readme",
+  "homepage": "https://github.com/mollie/PrestaShop#readme",
   "devDependencies": {
     "cypress": "^13.6.1",
     "cypress-fail-fast": "^7.0.0",

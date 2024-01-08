@@ -3,7 +3,7 @@ version: "3.7"
 services:
   mysql:
     platform: linux/amd64
-    container_name: mysql-klarnapayment-8
+    container_name: mysql-mollie-8
     image: mysql:5.7
     ports:
       - "9459:3306"
@@ -15,10 +15,10 @@ services:
       test: "mysqladmin ping -h127.0.0.1 -uroot -pprestashop --silent"
       interval: 10s
     networks:
-      - prestashop_klarnapayment_net_8
+      - prestashop_mollie_net_8
   prestashop-8:
     platform: linux/amd64
-    container_name: prestashop-klarnapayment-8
+    container_name: prestashop-mollie-8
     build:
       context: .
       dockerfile: .docker/Dockerfile.8
@@ -28,7 +28,7 @@ services:
       DB_PASSWD: prestashop
       DB_NAME: prestashop
       DB_SERVER: mysql
-      PS_DOMAIN: klarnapayment8.ngrok.io
+      PS_DOMAIN: mollie8.ngrok.io
       PS_FOLDER_INSTALL: install
       PS_FOLDER_ADMIN: admin1
     depends_on:
@@ -36,10 +36,10 @@ services:
     ports:
       - "8142:80"
     volumes:
-      - ./:/var/www/html/modules/klarnapayment
+      - ./:/var/www/html/modules/mollie
       - ./.docker/.htaccess8:/var/www/html/.htaccess
     networks:
-      - prestashop_klarnapayment_net_8
+      - prestashop_mollie_net_8
     healthcheck:
       test: "curl -f localhost:8142"
       interval: 5s
@@ -52,8 +52,8 @@ services:
     ports:
       - '6969:8080'
     networks:
-      - prestashop_klarnapayment_net_8
+      - prestashop_mollie_net_8
 
 networks:
-  prestashop_klarnapayment_net_8:
-    name: 'prestashop_klarnapayment_net_8'
+  prestashop_mollie_net_8:
+    name: 'prestashop_mollie_net_8'
